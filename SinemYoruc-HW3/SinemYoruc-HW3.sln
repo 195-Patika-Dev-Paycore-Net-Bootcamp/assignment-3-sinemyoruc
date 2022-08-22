@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinemYoruc-HW3", "SinemYoruc-HW3\SinemYoruc-HW3.csproj", "{06CF628E-4860-4A4D-B0D0-69DE7EAE64D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06CF628E-4860-4A4D-B0D0-69DE7EAE64D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06CF628E-4860-4A4D-B0D0-69DE7EAE64D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06CF628E-4860-4A4D-B0D0-69DE7EAE64D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06CF628E-4860-4A4D-B0D0-69DE7EAE64D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBEB8E4F-F049-4F30-893D-29E5E97337C8}
+	EndGlobalSection
+EndGlobal
