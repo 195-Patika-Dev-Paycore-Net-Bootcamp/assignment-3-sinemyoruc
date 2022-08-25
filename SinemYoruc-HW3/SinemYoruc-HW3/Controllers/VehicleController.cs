@@ -32,8 +32,7 @@ namespace SinemYoruc_HW3
             {
                 Vehicle vehicle = session.Vehicles.Where(x => x.Id == id).FirstOrDefault();
                 var container = session.Containers.Where(x => x.VehicleId == vehicle.Id).ToList();
-                var response = session.Containers.Where(x => x.VehicleId == vehicle.Id).ToList();
-                return response;
+                return container;
             }
             catch (Exception ex)
             {
@@ -100,7 +99,7 @@ namespace SinemYoruc_HW3
         public ActionResult<Vehicle> Delete(int id)
         {
             Vehicle vehicle = session.Vehicles.Where(x => x.Id == id).FirstOrDefault();
-            
+
             if (vehicle == null)
             {
                 return NotFound();
@@ -114,12 +113,9 @@ namespace SinemYoruc_HW3
                 Container container = session.Containers.Where(x => x.VehicleId == vehicle.Id).FirstOrDefault();
                 if (container != null)
                 {
-                    if (vehicle.Id == container.VehicleId)
-                    {
-                        session.Delete(container);
-                        session.Commit();
-                    }
-                } 
+                    session.Delete(container);
+                    session.Commit();
+                }
             }
             catch (Exception ex)
             {
