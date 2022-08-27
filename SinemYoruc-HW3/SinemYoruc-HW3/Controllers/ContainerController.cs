@@ -57,9 +57,9 @@ namespace SinemYoruc_HW3.Controllers
             {
                 session.BeginTransaction();
 
-                container.ContainerName = request.ContainerName;
-                container.Latitude = request.Latitude;
-                container.Longitude = request.Longitude;
+                container.ContainerName = request.ContainerName != default ? request.ContainerName : container.ContainerName;
+                container.Latitude = request.Latitude != default ? request.Latitude : container.Latitude;
+                container.Longitude = request.Longitude != default ? request.Longitude : container.Longitude;
 
                 session.Update(container);
 
@@ -84,7 +84,7 @@ namespace SinemYoruc_HW3.Controllers
             Container container = session.Containers.Where(x => x.Id == id).FirstOrDefault();
             if (container == null)
             {
-                return NotFound();
+                return NotFound("Container is not found");
             }
 
             try

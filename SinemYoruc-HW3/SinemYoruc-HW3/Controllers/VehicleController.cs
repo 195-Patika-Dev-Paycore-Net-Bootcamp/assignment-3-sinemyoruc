@@ -75,8 +75,8 @@ namespace SinemYoruc_HW3
             {
                 session.BeginTransaction();
 
-                vehicle.VehicleName = request.VehicleName;
-                vehicle.VehiclePlate = request.VehiclePlate;
+                vehicle.VehicleName = request.VehicleName != default ? request.VehicleName : vehicle.VehicleName;
+                vehicle.VehiclePlate = request.VehiclePlate != default ? request.VehiclePlate : vehicle.VehiclePlate;
 
                 session.Update(vehicle);
 
