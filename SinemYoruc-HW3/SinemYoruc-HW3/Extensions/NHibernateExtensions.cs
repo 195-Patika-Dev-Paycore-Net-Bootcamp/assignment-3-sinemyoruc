@@ -8,7 +8,7 @@ namespace SinemYoruc_HW3
 {
     public static class NHibernateExtensions
     {
-
+        //hibernate ekleme
         public static IServiceCollection AddNHibernatePosgreSql(this IServiceCollection services, string connectionString)
         {
             var mapper = new ModelMapper();

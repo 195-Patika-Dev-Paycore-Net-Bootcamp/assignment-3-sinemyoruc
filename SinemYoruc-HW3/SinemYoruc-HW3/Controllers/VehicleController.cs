@@ -18,32 +18,15 @@ namespace SinemYoruc_HW3
 
 
         [HttpGet]
-        public List<Vehicle> Get()
+        public List<Vehicle> Get() //Tum araclari getir
         {
             var response = session.Vehicles.ToList();
             return response;
         }
 
 
-        [HttpGet("{id}")]
-        public ActionResult<List<Container>> GetById(int id)
-        {
-            try
-            {
-                Vehicle vehicle = session.Vehicles.Where(x => x.Id == id).FirstOrDefault();
-                var container = session.Containers.Where(x => x.VehicleId == vehicle.Id).ToList();
-                return container;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Vehicle is not found");
-                return NotFound("Vehicle is not found");
-            }
-
-        }
-
         [HttpPost]
-        public void Post([FromBody] Vehicle vehicle)
+        public void Post([FromBody] Vehicle vehicle) //Arac ekleme
         {
             try
             {
@@ -63,7 +46,7 @@ namespace SinemYoruc_HW3
         }
 
         [HttpPut]
-        public ActionResult<Vehicle> Put([FromBody] Vehicle request)
+        public ActionResult<Vehicle> Put([FromBody] Vehicle request) //Arac guncelleme
         {
             Vehicle vehicle = session.Vehicles.Where(x => x.Id == request.Id).FirstOrDefault();
             if (vehicle == null)
@@ -75,6 +58,7 @@ namespace SinemYoruc_HW3
             {
                 session.BeginTransaction();
 
+                // id guncellenmedi
                 vehicle.VehicleName = request.VehicleName != default ? request.VehicleName : vehicle.VehicleName;
                 vehicle.VehiclePlate = request.VehiclePlate != default ? request.VehiclePlate : vehicle.VehiclePlate;
 
@@ -96,7 +80,7 @@ namespace SinemYoruc_HW3
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Vehicle> Delete(int id)
+        public ActionResult<Vehicle> Delete(int id) //Arac silme
         {
             Vehicle vehicle = session.Vehicles.Where(x => x.Id == id).FirstOrDefault();
 
@@ -110,7 +94,7 @@ namespace SinemYoruc_HW3
                 session.BeginTransaction();
                 session.Delete(vehicle);
                 session.Commit();
-                Container container = session.Containers.Where(x => x.VehicleId == vehicle.Id).FirstOrDefault();
+                Container container = session.Containers.Where(x => x.VehicleId == vehicle.Id).FirstOrDefault(); //ayni vehicleIdye sahip container varsa onu da siliyor
                 if (container != null)
                 {
                     session.Delete(container);

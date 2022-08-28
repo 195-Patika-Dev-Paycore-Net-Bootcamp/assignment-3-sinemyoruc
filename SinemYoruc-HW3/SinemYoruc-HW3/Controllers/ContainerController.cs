@@ -18,14 +18,33 @@ namespace SinemYoruc_HW3.Controllers
 
 
         [HttpGet]
-        public List<Container> Get()
+        public List<Container> Get() //Tum containerlari getiren method
         {
             var response = session.Containers.ToList();
             return response;
         }
 
+
+        [HttpGet("{id}")]
+        public ActionResult<List<Container>> GetById(int id) // girilen vehicleId ye göre containerlari listele
+        {
+            try
+            {
+                Vehicle vehicle = session.Vehicles.Where(x => x.Id == id).FirstOrDefault();
+                var container = session.Containers.Where(x => x.VehicleId == vehicle.Id).ToList();
+                return container;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Vehicle is not found");
+                return NotFound("Vehicle is not found");
+            }
+
+        }
+
+
         [HttpPost]
-        public void Post([FromBody] Container container)
+        public void Post([FromBody] Container container) //Container ekleme
         {
             try
             {
@@ -45,7 +64,7 @@ namespace SinemYoruc_HW3.Controllers
         }
 
         [HttpPut]
-        public ActionResult<Container> Put([FromBody] Container request)
+        public ActionResult<Container> Put([FromBody] Container request) //Container guncelleme
         {
             Container container = session.Containers.Where(x => x.Id == request.Id).FirstOrDefault();
             if (container == null)
@@ -57,7 +76,9 @@ namespace SinemYoruc_HW3.Controllers
             {
                 session.BeginTransaction();
 
-                container.ContainerName = request.ContainerName != default ? request.ContainerName : container.ContainerName;
+                //Id ve vehicleId alanlari guncellenmedi
+
+                container.ContainerName = request.ContainerName != default ? request.ContainerName : container.ContainerName; 
                 container.Latitude = request.Latitude != default ? request.Latitude : container.Latitude;
                 container.Longitude = request.Longitude != default ? request.Longitude : container.Longitude;
 
@@ -79,7 +100,7 @@ namespace SinemYoruc_HW3.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Container> Delete(int id)
+        public ActionResult<Container> Delete(int id) //Container silme
         {
             Container container = session.Containers.Where(x => x.Id == id).FirstOrDefault();
             if (container == null)
