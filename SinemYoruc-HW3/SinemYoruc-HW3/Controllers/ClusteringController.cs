@@ -20,20 +20,12 @@ namespace SinemYoruc_HW3.Controllers
         [HttpGet]
         public ActionResult<List<Container>> GetByClustering(int id, int n)
         {
-            var listCount = session.Containers.Where(x => x.VehicleId == id).Count();
-            int result = listCount / n;
-            var query = session.Containers.Where(x => x.VehicleId == id).GroupBy(x => new { result, x.VehicleId });
-            /*
-             ArrayList list = new ArrayList();
-            for (int i = 0; i < result; i++)
-            {
-                foreach (var item in query)
-                {
+            var query = session.Containers.Where(x => x.VehicleId == id).ToList()
+                .Select((x, i) => new { Index = i, value = x })
+                .GroupBy(x => x.Index % n)
+                .Select(x => x.Select(v => v.value).ToList())
+                .ToList();
 
-                    list.Add(item);
-                }
-            }
-            return Ok(list);*/
             return Ok(query);
         }
     }
