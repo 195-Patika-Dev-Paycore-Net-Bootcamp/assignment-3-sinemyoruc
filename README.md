@@ -2,14 +2,14 @@
 
 
 ## Installation
-Öncelikle projeyi kolonlayın.
+Öncelikle projeyi klonlayın.
 
 ```
 git clone https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-sinemyoruc.git
 ```
 
 ## Usage
-Projeyi cloneladıktan sonra Visual Studio 2022 programında açınız.
+Projeyi klonladıktan sonra Visual Studio 2022 programında açınız.
 
 Daha sonra uygulamayı çalıştırabilirsiniz.
 
